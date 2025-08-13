@@ -1,0 +1,254 @@
+[
+  {
+    "summary": "Project Kick-off Meeting",
+    "description": "Organize and facilitate the project kick-off meeting to align all stakeholders on project objectives, timelines, and roles.",
+    "key": "SCRUM-87",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-87"
+  },
+  {
+    "summary": "Environment Setup",
+    "description": "Establish the necessary development and testing environments for the project, including cloud resources and local setups.",
+    "key": "SCRUM-88",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-88"
+  },
+  {
+    "summary": "Communication Protocols Definition",
+    "description": "Define and document the communication protocols to be used during the project, detailing how information will be shared among stakeholders.",
+    "key": "SCRUM-89",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-89"
+  },
+  {
+    "summary": "UI/UX Design Development",
+    "description": "Create wireframes and user interface designs for the front-end application, ensuring adherence to accessibility standards.",
+    "key": "SCRUM-90",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-90"
+  },
+  {
+    "summary": "Angular Application Setup",
+    "description": "Setup the Angular framework for the front-end application, including initial configurations and project structure.",
+    "key": "SCRUM-91",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-91"
+  },
+  {
+    "summary": "Frontend Foundational Components Development",
+    "description": "Develop foundational UI components for the application using Angular that will be reused throughout the project.",
+    "key": "SCRUM-92",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-92"
+  },
+  {
+    "summary": "ASP.NET Core Project Structure Setup",
+    "description": "Establish the structure for the ASP.NET Core backend project, including folder organization and initial configurations.",
+    "key": "SCRUM-93",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-93"
+  },
+  {
+    "summary": "RESTful API Development",
+    "description": "Develop RESTful APIs to support the core functionalities of the ERP application, ensuring proper endpoint structures.",
+    "key": "SCRUM-94",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-94"
+  },
+  {
+    "summary": "Database Schema Design",
+    "description": "Design the database schema using MongoDB that supports the data requirements of the ERP system.",
+    "key": "SCRUM-95",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-95"
+  },
+  {
+    "summary": "AI Features Development",
+    "description": "Implement AI features for predictive analytics within the ERP system to enhance data-driven decision making.",
+    "key": "SCRUM-96",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-96"
+  },
+  {
+    "summary": "Core Module API Integrations",
+    "description": "Integrate APIs for core modules such as finance, HR, and supply chain to ensure seamless data flow across the application.",
+    "key": "SCRUM-97",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-97"
+  },
+  {
+    "summary": "User Authentication and Access Control",
+    "description": "Implement user authentication processes and access controls to secure the ERP system.",
+    "key": "SCRUM-98",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-98"
+  },
+  {
+    "summary": "Comprehensive Functional Testing",
+    "description": "Conduct thorough functional testing of the ERP application to ensure all features meet the defined specifications.",
+    "key": "SCRUM-99",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-99"
+  },
+  {
+    "summary": "User Acceptance Testing Sessions",
+    "description": "Facilitate user acceptance testing sessions with end users to gather feedback and confirm that the application meets their needs.",
+    "key": "SCRUM-100",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-100"
+  },
+  {
+    "summary": "Feedback Adjustments Based on UAT",
+    "description": "Make necessary adjustments to the application based on feedback received during user acceptance testing.",
+    "key": "SCRUM-101",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-101"
+  },
+  {
+    "summary": "Final Deployment on Azure",
+    "description": "Deploy the completed ERP application on the Azure cloud platform, ensuring security and scalability.",
+    "key": "SCRUM-102",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-102"
+  },
+  {
+    "summary": "User Training Sessions",
+    "description": "Provide user training sessions to educate end-users on how to effectively use the new ERP system.",
+    "key": "SCRUM-103",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-103"
+  },
+  {
+    "summary": "Post-Launch Performance Monitoring",
+    "description": "Monitor the performance of the ERP application post-launch to ensure it meets performance and uptime KPIs.",
+    "key": "SCRUM-104",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-104"
+  },
+  {
+    "summary": "Risk Management Team Establishment",
+    "description": "Form a risk management team tasked with monitoring and addressing potential risks throughout the project lifecycle.",
+    "key": "SCRUM-105",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-105"
+  },
+  {
+    "summary": "Change Management Strategy Implementation",
+    "description": "Develop and implement a change management strategy to handle transitional challenges during the project's execution.",
+    "key": "SCRUM-106",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-106"
+  },
+  {
+    "summary": "CI/CD Pipeline Implementation",
+    "description": "Set up CI/CD pipelines using Azure DevOps for automated testing and deployment processes.",
+    "key": "SCRUM-107",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-107"
+  },
+  {
+    "summary": "Containerization with Docker",
+    "description": "Implement containerization for the application using Docker to ensure consistency across development and production environments.",
+    "key": "SCRUM-108",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-108"
+  },
+  {
+    "summary": "Role-Based Access Control Implementation",
+    "description": "Establish role-based access control mechanisms to secure the application and manage user permissions.",
+    "key": "SCRUM-109",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-109"
+  },
+  {
+    "summary": "Data Encryption Measures",
+    "description": "Embed data encryption practices for both data in transit and at rest to ensure compliance with security standards.",
+    "key": "SCRUM-110",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-110"
+  },
+  {
+    "summary": "Project Initialization: Repository Setup",
+    "description": "Set up the version control repository for the Online Quiz App project. Ensure that the repository structure is aligned with best practices and that initial documentation is included.",
+    "key": "SCRUM-111",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-111"
+  },
+  {
+    "summary": "Project Initialization: Project Structure Documentation",
+    "description": "Create detailed project structure documentation outlining components, architecture, and workflows. This document should serve as a reference for the development team.",
+    "key": "SCRUM-112",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-112"
+  },
+  {
+    "summary": "UI/UX Design: Wireframes Creation",
+    "description": "Develop wireframes for the Online Quiz App focusing on user journey, accessibility, and intuitive navigation. Present wireframes for feedback from stakeholders.",
+    "key": "SCRUM-113",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-113"
+  },
+  {
+    "summary": "UI/UX Design: User Journey Diagrams",
+    "description": "Create user journey diagrams to map out the experience of a user interacting with the Online Quiz App. These diagrams must align with the intended features.",
+    "key": "SCRUM-114",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-114"
+  },
+  {
+    "summary": "Backend Development: Server Initialization",
+    "description": "Initialize the backend server environment using Node.js and Express. Ensure that the server is configured for development and future deployment.",
+    "key": "SCRUM-115",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-115"
+  },
+  {
+    "summary": "Backend Development: RESTful API Development",
+    "description": "Develop the RESTful APIs required for the Quiz application. Ensure endpoints are documented and adhere to RESTful principles.",
+    "key": "SCRUM-116",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-116"
+  },
+  {
+    "summary": "Backend Development: Database Schema Design",
+    "description": "Design the database schema using PostgreSQL to support user management, quiz creation, and analytics features. The schema design must ensure data integrity and security.",
+    "key": "SCRUM-117",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-117"
+  },
+  {
+    "summary": "Frontend Development: Core Functionality Implementation",
+    "description": "Implement the core functionality of the frontend using Vue.js, ensuring that the application is responsive and user-friendly.",
+    "key": "SCRUM-118",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-118"
+  },
+  {
+    "summary": "Frontend Development: Navigation Features",
+    "description": "Develop navigation features for the Online Quiz App to enhance user experience and engagement across different quiz sections.",
+    "key": "SCRUM-119",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-119"
+  },
+  {
+    "summary": "Frontend Development: Quiz Types Support",
+    "description": "Implement support for various quiz types within the application, ensuring that users can engage in multiple formats of quizzes.",
+    "key": "SCRUM-120",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-120"
+  },
+  {
+    "summary": "Testing: User Testing Sessions",
+    "description": "Organize and conduct user testing sessions to gather feedback on usability and functionality. Document findings and prepare recommendations for improvements.",
+    "key": "SCRUM-121",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-121"
+  },
+  {
+    "summary": "Deployment: Application Deployment on GCP",
+    "description": "Deploy the Online Quiz App on Google Cloud Platform, ensuring that the environment is configured for security and performance according to the project requirements.",
+    "key": "SCRUM-122",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-122"
+  },
+  {
+    "summary": "Risk Assessment: Integration Testing",
+    "description": "Conduct regular integration testing between frontend and backend components to mitigate integration challenges. Document results and address issues promptly.",
+    "key": "SCRUM-123",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-123"
+  },
+  {
+    "summary": "Communication: Stand-up Meetings",
+    "description": "Schedule and lead daily stand-up meetings for the project team to discuss progress, challenges, and upcoming tasks. Ensure clear communication is maintained.",
+    "key": "SCRUM-124",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-124"
+  },
+  {
+    "summary": "QA Strategy: Continuous Testing Implementation",
+    "description": "Implement a continuous testing approach, including unit and integration tests, ensuring thorough testing of all application components throughout the development lifecycle.",
+    "key": "SCRUM-125",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-125"
+  },
+  {
+    "summary": "Budget Control: Monthly Budget Review",
+    "description": "Conduct monthly reviews of the project budget, analyzing spending against the initial budget projections, and document any necessary adjustments.",
+    "key": "SCRUM-126",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-126"
+  },
+  {
+    "summary": "Change Control: Version Control Policy Definition",
+    "description": "Define a formal version control policy using Git, outlining branching strategies and merging protocols for effective collaboration among team members.",
+    "key": "SCRUM-127",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-127"
+  },
+  {
+    "summary": "Feedback Collection: Initial User Feedback Survey",
+    "description": "Develop and distribute an initial user feedback survey post-launch to gather insights on user experience and satisfaction. Analyze results for future improvements.",
+    "key": "SCRUM-128",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-128"
+  }
+]

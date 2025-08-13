@@ -18,13 +18,14 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./results-page.scss";
 import { marked } from "marked";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 
 function ProjectPlanPage() {
+  const navigate = useNavigate();
   const [projectMarkdown, setProjectMarkdown] = useState("");
   const [loading, setLoading] = useState(true);
   const location = useLocation();
@@ -150,6 +151,10 @@ function ProjectPlanPage() {
       setSubmittingAll(false);
     }
   }
+
+  const handleNavigateToDevelopment = () => {
+    navigate("/development-tasks", { state: { projectMarkdown } });
+  };
 
   const handleDownloadStyledPdf = () => {
     const htmlResult = marked.parse(projectMarkdown);
@@ -293,7 +298,15 @@ function ProjectPlanPage() {
           onClick={handleGenerateTicketsFromPlan}
           sx={{ mt: 2 }}
         >
-          Generate Suggested JIRA Tickets
+          Generate JIRA Tickets
+        </Button>
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={handleNavigateToDevelopment}
+          sx={{ mt: 2 }}
+        >
+          Start Development
         </Button>
       </div>
 

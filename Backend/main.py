@@ -10,7 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import requests
 from requests.auth import HTTPBasicAuth
 from crewai import Crew, Task
-from agents import ticket_generator_agent
+from agents import ticket_generator_agent, development_task_extractor, frontend_task_agent, backend_task_agent, database_task_agent, cloud_task_agent, devops_task_agent, design_task_agent
 import json
 
 load_dotenv()
@@ -56,6 +56,30 @@ class JiraTicketPlanRequest(BaseModel):
 class FinalizedTicket(BaseModel):
     summary: str
     description: str
+    
+class CodeSnippetSingleTaskRequest(BaseModel):
+    task_name: str
+    task_description: str
+    final_plan: str
+
+TICKET_STORE_PATH = "saved_tickets.json"
+
+def save_tickets_locally(ticket_list):
+    try:
+        if os.path.exists(TICKET_STORE_PATH):
+            with open(TICKET_STORE_PATH, "r") as f:
+                existing = json.load(f)
+        else:
+            existing = []
+
+        existing.extend(ticket_list)
+
+        with open(TICKET_STORE_PATH, "w") as f:
+            json.dump(existing, f, indent=2)
+
+    except Exception as e:
+        print("⚠️ Error saving tickets locally:", e)
+
 
 @app.post("/api/generate-project-plan")
 async def generate_project_plan(request: Request):
@@ -209,7 +233,6 @@ async def generate_jira_tickets(data: JiraTicketPlanRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-
 @app.post("/api/push-finalized-tickets")
 async def push_finalized_tickets(tickets: List[FinalizedTicket]):
     try:
@@ -220,7 +243,6 @@ async def push_finalized_tickets(tickets: List[FinalizedTicket]):
         results = []
 
         for ticket in tickets:
-            # Wrap the plain description text in Atlassian Document Format (ADF)
             adf_description = {
                 "type": "doc",
                 "version": 1,
@@ -246,17 +268,226 @@ async def push_finalized_tickets(tickets: List[FinalizedTicket]):
             response = requests.post(jira_url, json=payload, headers=headers, auth=auth)
             if response.status_code == 201:
                 issue = response.json()
-                results.append(
-                    {
-                        "summary": ticket.summary,
-                        "key": issue["key"],
-                        "url": f"{os.getenv('JIRA_BASE_URL')}/browse/{issue['key']}",
-                    }
-                )
+                ticket_info = {
+                    "summary": ticket.summary,
+                    "description": ticket.description,
+                    "key": issue["key"],
+                    "url": f"{os.getenv('JIRA_BASE_URL')}/browse/{issue['key']}",
+                }
+                results.append(ticket_info)
             else:
                 results.append({"summary": ticket.summary, "error": response.text})
 
+        # 🔐 Save ticket summaries locally
+        save_tickets_locally(results)
+
         return {"created_issues": results}
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+from agents import development_task_extractor
+
+@app.post("/api/get-suggested-dev-tasks")
+async def get_suggested_dev_tasks(request: Request):
+    try:
+        data = await request.json()
+        final_plan = data.get("final_plan")
+
+        if not final_plan:
+            raise HTTPException(status_code=400, detail="Missing 'final_plan' in request")
+
+        task = Task(
+            agent=development_task_extractor,
+            description=f"""
+        Review the following software project plan and extract only development tasks. These should be coding-related tasks that developers would need to implement — such as building APIs, setting up databases, authentication, frontend components, CI/CD, or infrastructure code.
+
+        Avoid including planning, meetings, or stakeholder reviews.
+
+        ### PROJECT PLAN:
+        {final_plan}
+
+        Respond ONLY with a plain JSON list like this:
+        [
+        {{
+            "summary": "Implement OAuth2 login flow",
+            "description": "Use FastAPI and Google OAuth2 to let users authenticate and retrieve a JWT token."
+        }},
+        ...
+        ]
+        """,
+            expected_output="A clean JSON list of implementation tasks with summary and description."
+        )
+
+        crew = Crew(
+            agents=[development_task_extractor],
+            tasks=[task],
+            process="sequential",
+            verbose=True
+        )
+
+        output = crew.kickoff()
+        raw_output = output.raw
+
+        # Extract JSON
+        json_start = raw_output.find("[")
+        json_end = raw_output.rfind("]") + 1
+        clean_json = raw_output[json_start:json_end]
+        dev_tasks = json.loads(clean_json)
+
+        return {"suggested_tasks": dev_tasks}
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+
+@app.post("/api/generate-code-snippet")
+async def generate_code_snippet(data: CodeSnippetSingleTaskRequest):
+    try:
+        prompt = f"""
+        You are an experienced senior software engineer. Based on the project plan below, generate a code snippet that addresses the following task.
+
+        ### PROJECT PLAN
+        {data.final_plan}
+
+        ### TASK NAME
+        {data.task_name}
+
+        ### TASK DESCRIPTION
+        {data.task_description}
+
+        ---
+
+        Use the tech stack (e.g., frontend/backend/frameworks/database/cloud) referenced in the project plan. Your response must:
+        - Be relevant to the described task.
+        - Include one high-quality code snippet.
+        - Include the appropriate language in your response.
+        - Return ONLY a valid JSON object in the format:
+
+        {{
+        "task": "Task name",
+        "language": "Python | JavaScript | SQL | etc.",
+        "snippet": "your code here"
+        }}
+        """
+
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": "You are a precise full-stack developer."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.3,
+        )
+
+        raw_output = response.choices[0].message.content.strip()
+
+        try:
+            return json.loads(raw_output)
+        except json.JSONDecodeError:
+            cleaned = raw_output.strip("```json").strip("```").strip()
+            return json.loads(cleaned)
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/get-dev-categories")
+async def get_dev_categories(request: Request):
+    try:
+        data = await request.json()
+        final_plan = data.get("final_plan")
+        if not final_plan:
+            raise HTTPException(status_code=400, detail="Missing final_plan")
+
+        # Extract tech from plan using LLM or regex (LLM preferred for reliability)
+        prompt = f"""
+                Given this software project plan, extract the tech stack used across the following categories: Frontend, Backend, Database, Cloud, DevOps, Design.
+
+                Only respond in this JSON format:
+                [
+                {{ "name": "Frontend", "tech": ["React", "Tailwind"] }},
+                {{ "name": "Backend", "tech": ["FastAPI"] }},
+                ...
+                ]
+
+                Do not explain anything. Use the technologies mentioned in the plan only.
+
+                PROJECT PLAN:
+                {final_plan}
+            """
+
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": "You extract categorized tech stacks from project plans."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.2,
+        )
+
+        raw = response.choices[0].message.content.strip()
+        try:
+            return {"categories": json.loads(raw)}
+        except json.JSONDecodeError:
+            cleaned = raw.strip("```json").strip("```").strip()
+            return {"categories": json.loads(cleaned)}
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/get-tasks-by-category")
+async def get_tasks_by_category(request: Request):
+    try:
+        data = await request.json()
+        category = data.get("category")
+        final_plan = data.get("final_plan")
+
+        if not category or not final_plan:
+            raise HTTPException(status_code=400, detail="Missing category or final_plan")
+
+        agent = {
+            "Frontend": frontend_task_agent,
+            "Backend": backend_task_agent,
+            "Database": database_task_agent,
+            "Cloud": cloud_task_agent,
+            "DevOps": devops_task_agent,
+            "Design": design_task_agent
+        }.get(category)
+
+        if not agent:
+            raise HTTPException(status_code=400, detail=f"No agent found for category '{category}'")
+
+        description = f"""
+                        Given this software project plan, list out 5-10 specific development tasks the {category.lower()} developer should implement using the technologies mentioned in the plan. 
+                        Each task should be focused (e.g., 'Build navbar', 'Integrate login form') and output as JSON like this:
+
+                        [
+                        {{ "summary": "...", "description": "..." }},
+                        ...
+                        ]
+
+                        PROJECT PLAN:
+                        {final_plan}
+                        """
+
+        task = Task(
+            agent=agent,
+            description=description,
+            expected_output="A plain JSON list of dev tasks (summary + description)"
+        )
+
+        crew = Crew(agents=[agent], tasks=[task], process="sequential", verbose=True)
+        output = crew.kickoff()
+
+        raw = output.raw
+        json_start = raw.find("[")
+        json_end = raw.rfind("]") + 1
+        clean = raw[json_start:json_end]
+        return {"tasks": json.loads(clean)}
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
