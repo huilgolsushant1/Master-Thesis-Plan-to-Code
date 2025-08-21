@@ -123,7 +123,7 @@ Project description:
 """
 
             response = client.chat.completions.create(
-                model="gpt-4o-mini",
+                model="gpt-4o",
                 messages=[
                     {"role": "system", "content": "You are an expert project data extractor."},
                     {"role": "user", "content": prompt},
@@ -153,7 +153,7 @@ Project description:
         prompt = build_prompt_from_agents(agent_output)
 
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4o",
             messages=[
                 {"role": "system", "content": "You are a helpful and precise software architect."},
                 {"role": "user", "content": prompt},
@@ -187,7 +187,7 @@ Output the full refined plan with improved clarity and consistency.
 """
 
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4o",
             messages=[
                 {"role": "system", "content": "You are an expert planner and editor."},
                 {"role": "user", "content": prompt},
@@ -374,7 +374,7 @@ async def generate_code_snippet(data: CodeSnippetSingleTaskRequest):
         """
 
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4o",
             messages=[
                 {"role": "system", "content": "You are a precise full-stack developer."},
                 {"role": "user", "content": prompt}
@@ -420,7 +420,7 @@ async def get_dev_categories(request: Request):
             """
 
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4o",
             messages=[
                 {"role": "system", "content": "You extract categorized tech stacks from project plans."},
                 {"role": "user", "content": prompt}
