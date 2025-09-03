@@ -99,7 +99,7 @@ database_task_agent = Agent(
 cloud_task_agent = Agent(
     name="Cloud Task Agent",
     role="Identify cloud setup and provisioning tasks",
-    goal="List deployment, infrastructure-as-code, and environment setup tasks aligned with the cloud platform mentioned in the plan",
+    goal="List deployment, infrastructure-as-code, and environment setup tasks aligned with the cloud platform mentioned in the plan. Make sure your tasks are not overlapping with other agents.",
     backstory="A cloud architect who provisions scalable, secure infrastructure and services based on platform best practices (e.g., AWS, Azure, GCP).",
     verbose=True,
     allow_delegation=False
@@ -107,17 +107,8 @@ cloud_task_agent = Agent(
 
 devops_task_agent = Agent(
     name="DevOps Task Agent",
-    role="Break down CI/CD and operations work",
-    goal="Suggest tasks for pipelines, testing automation, monitoring, and deployment processes",
-    backstory="A DevOps specialist who translates development flow into robust automation pipelines and observability systems.",
-    verbose=True,
-    allow_delegation=False
-)
-
-devops_task_agent = Agent(
-    name="DevOps Task Agent",
     role="Break down DevOps tasks",
-    goal="Generate detailed DevOps-related tasks including CI/CD, infrastructure automation, monitoring, and deployment workflows",
+    goal="Generate detailed DevOps-related tasks including CI/CD, infrastructure automation, monitoring, and deployment workflows. Make sure your tasks are not overlapping with other agents.",
     backstory="A DevOps engineer who builds robust automation pipelines, maintains high system uptime, and champions cloud-native delivery.",
     verbose=True,
     allow_delegation=False
@@ -130,4 +121,28 @@ design_task_agent = Agent(
     backstory="A UX/UI designer who works closely with product teams to define layout structures, component libraries, and high-fidelity mockups — before development begins.",
     verbose=True,
     allow_delegation=False
+)
+
+effort_estimator_agent = Agent(
+    role="Effort Estimator",
+    goal="Estimate developer-days or story points for tasks based on complexity, scope, and team composition.",
+    backstory="A senior project manager experienced in agile estimation and capacity planning."
+)
+
+dependency_mapper_agent = Agent(
+    role="Dependency Mapper",
+    goal="Identify task dependencies, sequence them realistically, and highlight which tasks can be done in parallel.",
+    backstory="An architect who maps dependencies and critical path for software execution plans."
+)
+
+sprint_planner_agent = Agent(
+    role="Sprint Planner",
+    goal="Distribute tasks across realistic 2-week sprints with parallel execution and milestones.",
+    backstory="An agile coach specializing in sprint planning and resource allocation."
+)
+
+critic_agent = Agent(
+    role="Plan Critic",
+    goal="Review the generated plan for gaps, unrealistic assumptions, or missing depth, and provide improvement notes.",
+    backstory="A senior auditor who critiques project plans for completeness and execution readiness."
 )

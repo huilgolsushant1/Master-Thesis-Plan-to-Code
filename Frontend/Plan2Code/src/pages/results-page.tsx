@@ -164,63 +164,123 @@ function ProjectPlanPage() {
 
       const content: any[] = [];
 
+      // Process only top-level nodes to avoid duplicates
       container.childNodes.forEach((node) => {
-        if (node.nodeName === "H1") {
-          content.push({ text: node.textContent, style: "header1" });
-        } else if (node.nodeName === "H2") {
-          content.push({ text: node.textContent, style: "header2" });
-        } else if (node.nodeName === "H3") {
-          content.push({ text: node.textContent, style: "header3" });
-        } else if (node.nodeName === "P") {
-          content.push({ text: node.textContent, style: "paragraph" });
-        } else if (node.nodeName === "PRE") {
+        if (node.nodeType !== Node.ELEMENT_NODE) return;
+
+        const element = node as Element;
+
+        // Handle headers
+        if (/^H[1-3]$/.test(element.nodeName)) {
           content.push({
-            text: node.textContent,
+            text: element.textContent,
+            style: `header${element.nodeName.slice(1)}` as
+              | "header1"
+              | "header2"
+              | "header3",
+            margin: [0, 20, 0, 10] as [number, number, number, number],
+          });
+        }
+        // Handle paragraphs
+        else if (element.nodeName === "P") {
+          content.push({
+            text: element.textContent,
+            style: "paragraph",
+            margin: [0, 4, 0, 4],
+          });
+        }
+        // Handle code blocks
+        else if (element.nodeName === "PRE") {
+          content.push({
+            text: element.textContent,
             style: "codeBlock",
             font: "Courier",
+            margin: [0, 10, 0, 10],
           });
-        } else if (node.nodeName === "UL") {
-          const items = Array.from(
-            (node as Element).querySelectorAll("li")
-          ).map((li) => ({
-            text: li.textContent,
-          }));
-          content.push({ ul: items, style: "list" });
+        }
+        // Handle lists
+        else if (element.nodeName === "UL" || element.nodeName === "OL") {
+          const items = Array.from(element.querySelectorAll(":scope > li")).map(
+            (li) => ({
+              text: li.textContent,
+            })
+          );
+          content.push({
+            [element.nodeName === "UL" ? "ul" : "ol"]: items,
+            style: "list",
+            margin: [10, 4, 0, 4],
+          });
+        }
+        // Handle tables
+        else if (element.nodeName === "TABLE") {
+          const tableBody: any[] = [];
+
+          // Process table rows
+          const rows = element.querySelectorAll("tr");
+          rows.forEach((row, rowIndex) => {
+            const rowData: any[] = [];
+
+            // Determine if this is a header row (first row or has th elements)
+            const isHeaderRow = rowIndex === 0 || row.querySelector("th");
+
+            // Process cells
+            const cells = row.querySelectorAll("th, td");
+            cells.forEach((cell) => {
+              rowData.push({
+                text: cell.textContent || "",
+                style: isHeaderRow ? "tableHeader" : "tableCell",
+                border: [false, false, false, false], // No borders
+              });
+            });
+
+            tableBody.push(rowData);
+          });
+
+          // Add table to content
+          content.push({
+            table: {
+              headerRows: 1, // First row is header
+              widths: Array.from(
+                { length: tableBody[0]?.length || 0 },
+                () => "*"
+              ), // Auto-width columns
+              body: tableBody,
+            },
+            layout: {
+              defaultBorder: false,
+              paddingLeft: () => 5,
+              paddingRight: () => 5,
+              paddingTop: () => 3,
+              paddingBottom: () => 3,
+            },
+            margin: [0, 10, 0, 10],
+          });
         }
       });
 
       const docDefinition = {
         content,
         styles: {
-          header1: {
-            fontSize: 20,
-            bold: true,
-            margin: [0, 20, 0, 10] as [number, number, number, number],
-          },
-          header2: {
-            fontSize: 16,
-            bold: true,
-            margin: [0, 18, 0, 8] as [number, number, number, number],
-          },
-          header3: {
-            fontSize: 14,
-            bold: true,
-            margin: [0, 16, 0, 6] as [number, number, number, number],
-          },
-          paragraph: {
-            fontSize: 11,
-            lineHeight: 1.7,
-            margin: [0, 4, 0, 4] as [number, number, number, number],
-          },
-          list: {
-            fontSize: 11,
-            margin: [10, 4, 0, 4] as [number, number, number, number],
-          },
+          header1: { fontSize: 20, bold: true },
+          header2: { fontSize: 16, bold: true },
+          header3: { fontSize: 14, bold: true },
+          paragraph: { fontSize: 11, lineHeight: 1.7 },
+          list: { fontSize: 11 },
           codeBlock: {
-            background: "#f6f8fa",
             fontSize: 10,
-            margin: [0, 10, 0, 10] as [number, number, number, number],
+            background: "#f6f8fa",
             color: "#333",
+            lineHeight: 1.5,
+          },
+          tableHeader: {
+            bold: true,
+            fontSize: 11,
+            color: "black",
+            fillColor: "#f5f5f5",
+          },
+          tableCell: {
+            fontSize: 10,
+            color: "black",
           },
         },
         defaultStyle: {
