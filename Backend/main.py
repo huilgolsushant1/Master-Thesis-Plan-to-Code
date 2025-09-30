@@ -131,12 +131,11 @@ async def generate_project_plan(request: Request):
         prompt = build_prompt_from_agents(agent_output)
 
         response = client.chat.completions.create(
-            model="gpt-4o",
+            model="o3",
             messages=[
                 {"role": "system", "content": "You are a helpful and precise software architect."},
                 {"role": "user", "content": prompt},
-            ],
-            temperature=0,
+            ]
         )
 
         return {"project_plan": response.choices[0].message.content.strip()}
@@ -165,12 +164,11 @@ Apply the feedback precisely. Keep the overall structure of the document, and mo
 Output the full refined plan with improved clarity and consistency.
 """
         response = client.chat.completions.create(
-            model="gpt-4o",
+            model="o3",
             messages=[
                 {"role": "system", "content": "You are an expert planner and editor."},
                 {"role": "user", "content": prompt},
-            ],
-            temperature=0.5,
+            ]
         )
         return {"refined_plan": response.choices[0].message.content.strip()}
 
@@ -304,12 +302,11 @@ Return ONLY JSON:
 {{"task": "Task name", "language": "Python | JS | etc.", "snippet": "your code"}}
 """
         response = client.chat.completions.create(
-            model="gpt-4o",
+            model="o3",
             messages=[
                 {"role": "system", "content": "You are a precise full-stack developer."},
                 {"role": "user", "content": prompt}
-            ],
-            temperature=0.3,
+            ]
         )
         raw_output = response.choices[0].message.content.strip()
         try:
@@ -338,9 +335,8 @@ PROJECT PLAN:
 {final_plan}
 """
         response = client.chat.completions.create(
-            model="gpt-4o",
-            messages=[{"role": "system", "content": "You extract tech stack."}, {"role": "user", "content": prompt}],
-            temperature=0.2,
+            model="o3",
+            messages=[{"role": "system", "content": "You extract tech stack."}, {"role": "user", "content": prompt}]
         )
         raw = response.choices[0].message.content.strip()
         try:

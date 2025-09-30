@@ -250,5 +250,113 @@
     "description": "Develop and distribute an initial user feedback survey post-launch to gather insights on user experience and satisfaction. Analyze results for future improvements.",
     "key": "SCRUM-128",
     "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-128"
+  },
+  {
+    "summary": "Project Management & Kick-off",
+    "description": "Initiate project planning and conduct project kick-off meeting with stakeholders. Establish governance and schedule initial project milestones.",
+    "key": "SCRUM-129",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-129"
+  },
+  {
+    "summary": "Continuous Project Management (6 months)",
+    "description": "Ongoing project management to oversee the progress of project activities for a duration of 6 months, ensuring timely delivery and stakeholder alignment.",
+    "key": "SCRUM-130",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-130"
+  },
+  {
+    "summary": "Dev Environment & Tooling Setup",
+    "description": "Set up the development environment and necessary tooling for the project's infrastructure and development workflows.",
+    "key": "SCRUM-131",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-131"
+  },
+  {
+    "summary": "Implement AWS Log Collector",
+    "description": "Develop and deploy the log collector service for AWS to ingest logs efficiently for processing.",
+    "key": "SCRUM-132",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-132"
+  },
+  {
+    "summary": "Implement Azure Log Collector",
+    "description": "Develop and deploy the log collector service for Azure to ensure multi-cloud log ingestion.",
+    "key": "SCRUM-133",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-133"
+  },
+  {
+    "summary": "Kafka Cluster Infrastructure as Code (IaC)",
+    "description": "Set up the Kafka cluster using Infrastructure as Code (IaC) to manage scalability and reliability.",
+    "key": "SCRUM-134",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-134"
+  },
+  {
+    "summary": "Data Processing Microservice Development",
+    "description": "Develop a microservice for processing ingested logs and performing necessary transformations.",
+    "key": "SCRUM-135",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-135"
+  },
+  {
+    "summary": "ML Model Development - Feature Engineering",
+    "description": "Create and polish feature engineering processes to enhance model training data for analytics.",
+    "key": "SCRUM-136",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-136"
+  },
+  {
+    "summary": "ML Model Development - Model Training & Tuning",
+    "description": "Train and tune the machine learning model to ensure it meets accuracy requirements as specified.",
+    "key": "SCRUM-137",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-137"
+  },
+  {
+    "summary": "ML Model Serving with TensorFlow Serving",
+    "description": "Deploy the trained ML model using TensorFlow Serving to enable predictions through the backend API.",
+    "key": "SCRUM-138",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-138"
+  },
+  {
+    "summary": "Backend API Development (Flask)",
+    "description": "Develop a RESTful API using Flask to provide access to processed log data and ML predictions.",
+    "key": "SCRUM-139",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-139"
+  },
+  {
+    "summary": "Frontend Dashboard Development (React + D3)",
+    "description": "Create a responsive dashboard using React and D3 to visualize log and anomaly detection insights.",
+    "key": "SCRUM-140",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-140"
+  },
+  {
+    "summary": "Implement Security Measures",
+    "description": "Integrate security practices including OAuth 2.0 authentication and data encryption protocols.",
+    "key": "SCRUM-141",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-141"
+  },
+  {
+    "summary": "CI/CD Pipeline Setup (Jenkins)",
+    "description": "Establish Continuous Integration and Continuous Deployment pipelines using Jenkins for automating builds and deployments.",
+    "key": "SCRUM-142",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-142"
+  },
+  {
+    "summary": "Testing & Validation Procedures",
+    "description": "Conduct comprehensive testing and validation of all developed components to ensure functionality and reliability.",
+    "key": "SCRUM-143",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-143"
+  },
+  {
+    "summary": "Documentation & Training Material Preparation",
+    "description": "Produce user manuals and training materials to meet documentation requirements for the platform.",
+    "key": "SCRUM-144",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-144"
+  },
+  {
+    "summary": "Deployment & Go-Live Preparation",
+    "description": "Prepare for the deployment of the platform, overseeing final validation and launch activities.",
+    "key": "SCRUM-145",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-145"
+  },
+  {
+    "summary": "Project Closure & Handover",
+    "description": "Conclude project activities, perform handover sessions with stakeholders, and document lessons learned.",
+    "key": "SCRUM-146",
+    "url": "https://sushanthuilgol.atlassian.net/browse/SCRUM-146"
   }
 ]
